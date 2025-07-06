@@ -1,9 +1,13 @@
 from flask import Flask,render_template,request,redirect,url_for,flash
 from flask_sqlalchemy import SQLAlchemy
 
+app=(Flask(__name__))
 
-app=Flask(__name__)
-
-db=SQLAlchemy(app)
 import config
+app.config.from_object(config)
+
+db=SQLAlchemy()
+db.init_app(app)
+
 import models
+import routes

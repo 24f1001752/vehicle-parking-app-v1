@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+ Register -Vehicle parking app
+{% endblock %}
+
+{% block content %} 
+
+<h1>Sign-Up</h1>
+<form method="post" class="mt-5">
+     <label for="username" class="form-label">Username:
+         <input type="text" name="username" id="username" class="form-control" required/>
+     </label>
+     
+     <label for="password" class="form-label">Password:
+         <input type="password" name="password" id="password" class="form-control" required/>
+     </label>
+     <label for="name" class="form-label">Name: 
+         <input type="text" name="name" id="name" class="form-control"/>
+     </label>
+     
+      <input type="submit" value="Sign-Up"  class="btn btn-success">
+</form>
+
+
+{% endblock %}   
+
+{% block style %}
+<style> 
+    h1 {
+        text-align: center;
+        margin-top: 64px;
+    }
+    form {
+        display:flex;
+        flex-direction: column;
+        align-items:center
+    }
+</style>
+{% endblock %}
+    
