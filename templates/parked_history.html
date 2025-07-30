@@ -1,0 +1,62 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Parking History - Vehicle Parking App
+{% endblock %}
+
+{% block content %}
+  <h1>Recent Parking History</h1>
+  <hr>
+ <table class="table">
+  <thead>
+    <tr>
+      <th>Lot ID</th>
+      <th>Spot ID</th>
+      <th>Location</th>
+      <th>Vehicle No</th>
+      <th>Timestamp</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+   
+    {% for reserve in reservations %}
+   
+    <tr>
+      <td>{{reserve.lot_id}}</td>
+
+      <td>{{ reserve.spot_id}}</td>
+      <td>{{ reserve.parkinglot.primary_location_name}}</td>
+      <td>{{ reserve.vehicle_number}}</td>
+      <td>{{ reserve.parking_timestamp}}</td>
+      <td>
+        {% if not reserve.leaving_timestamp %}
+        <a href="{{ url_for('leave_spot', reservation_id=reserve.id) }}" class="btn btn-warning">
+          <i class="fas fa-sign-out-alt fa-xs"></i>
+          Release
+        </a>
+        {% else %}
+        <span class="text-muted">Parked Out</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
+{% block style %}
+<style>
+h1,h2 {
+  text-align:center;
+}
+.heading{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+</style>
+
+
+{% endblock %}

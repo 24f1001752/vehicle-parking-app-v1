@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Release Parking Spot - Vehicle Parking App
+{% endblock %}
+
+{% block content %}
+  <h1>Release Parking Spot</h1>
+  <form method="POST" class="form" action="{{ url_for('leave_spot', reservation_id=reservation.id) }}">
+    <label for="name"  class="form-label">Spot ID:
+        <input type="text" name="spot_id" id="spot_id" class="form-control"  readonly value="{{spot.id}}" >
+    </label>
+   
+    <label for="name" class="form-label">Vehicle Number:
+      <input type="text" name="vehicle_number" id="vehicle_number" class="form-control" readonly value="{{reservation.vehicle_number}}">
+    </label>
+    <label for="name" class="form-label">Parking Timestamp:
+      <input type="text" name="parking_timestamp" id="parking_timestamp" class="form-control" readonly value="{{reservation.parking_timestamp}}">
+    </label>
+    <label for="name" class="form-label">Releasing Timestamp:
+      <input type="text" name="leaving_timestamp" id="leaving_timestamp" class="form-control" readonly value="{{curr_time}}">
+    </label>
+    <label for="name" class="form-label">Total Cost:
+      {% set hours = ((curr_time - reservation.parking_timestamp).total_seconds() / 3600)|round(0,'ceil') %}
+      {% set round_hours = hours|round(0,'ceil') %}
+      {% set billed_hours=1 if round_hours < 1 else round_hours %}
+
+      <input type="text" name="parking_cost" id="parking_cost" class="form-control" readonly value="{{'%.2f' % (billed_hours * lot.price)}}">
+    </label>
+   
+   
+
+
+    <button type="submit" class="btn btn-success">Release Spot</button>
+    <a href="{{ url_for('parked_history') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+
+     
+  
+{% endblock %}
+
+{% block style %}
+<style>
+    h1{
+       
+        text-align:center;
+    }
+    .form{
+      margin-top:20px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+</style>
+{% endblock %}

@@ -1,8 +1,33 @@
 {% extends "layout.html" %}
 
+
 {% block title %}
   Home - Vehicle Parking App
 {% endblock %}
 {% block content %}
-  Hello {{user.username}}!
+{% include "search_bar.html" with context %}
+<div class="parking_lot-list">
+  {% for parking_lot in parking_lots %}
+    <div class="parking_lot">
+      <h2>{{ parking_lot.primary_location_name }}</h2>
+      <p>Address: {{ parking_lot.address }}</p> 
+      <p>Price: Rs. {{ parking_lot.price }}</p>
+
+      {% set available_spotscount=parking_lot.spaces|selectattr("status","equalto","available")|list|length %}
+      {% set available_spots=parking_lot.spaces|selectattr("status","equalto","available")|list %}
+      {% set current_spot=available_spots[0] if available_spots else None %}
+      {% if available_spotscount > 0 %}
+       
+      
+      <p>Available Spots: {{ available_spotscount }}</p>
+      
+        <form action="{{ url_for('book_parking', spot_id=current_spot.id) }}" method="get">
+          <button type="submit" class="btn btn-primary">Reserve Spot</button>
+        </form>
+      {% else %}
+          <p class="text-danger">Spot not available</p>
+      {% endif %}
+      </div>
+  {% endfor %}
+</div>
 {% endblock %}

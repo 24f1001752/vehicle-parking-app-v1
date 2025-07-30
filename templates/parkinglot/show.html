@@ -1,0 +1,55 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h3>Parking Spots for Lot: {{ parking_lot.primary_location_name }}</h3>
+  <table class="table table-bordered table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Spot ID</th>
+        <th>User ID</th>
+        <th>Vehicle Number</th>
+        <th>Parking Time</th>
+        <th>Price</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for spot in parking_lot.spaces %}
+      <tr>
+        {% set reservation=(spot.reservations|sort(attribute='parking_timestamp')|last) %}
+        <td>{{spot.id}}</td>
+        <td>{{ reservation.user_id if reservation else 'N/A' }}</td>
+        <td>{{ reservation.vehicle_number if reservation else 'N/A' }}</td>
+        <td>{{ reservation.parking_timestamp.strftime('%Y-%m-%d %H:%M:%S') if reservation else 'N/A' }}</td>
+        <td>
+          {% if reservation %}
+             {% set hours=((now-reservation.parking_timestamp).total_seconds()/3600)|round(0,'ceil') %}
+          
+             Rs {{'%0.2f' % (hours * parking_lot.price) }} 
+
+          {% else %}
+             N/A
+          {% endif %}
+        </td>
+        <td>
+          {% if spot.status=="available" %}
+            <span class="text-success">Available</span>
+          {% else %}
+            <span class="text-danger">Occupied</span>
+          {% endif %}
+        <td>
+          {% if spot.status=="available" %}
+             <a href="{{url_for('delete_spot', spot_id=spot.id)}}" class="btn btn-danger"><i class='fas fa-trash'></i> Delete</a>
+          {% else %}
+             <span class="text-muted">N/A</span>
+          {% endif %}
+        </td>
+
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Registered Users - Vehicle Parking App
+{% endblock %}
+
+{% block content %}
+  <h1>Registered Users</h1>
+  <hr>
+ 
+<div class="heading">
+
+  
+</div>
+  <table class="table">
+  <thead>
+    <tr>
+      <th>User ID</th>
+      <th>Username</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Pin Code</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for i in users %}
+   
+    <tr>
+      <td>{{ i.id }}</td>
+      <td>{{ i.username }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.email }}</td>
+      <td>{{ i.address }}</td>
+      <td>{{ i.pincode }}</td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+ 
+{% endblock %}
+{% block style %}
+<style>
+h1,h2 {
+  text-align:center;
+}
+.heading{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+</style>
+
+
+{% endblock %}

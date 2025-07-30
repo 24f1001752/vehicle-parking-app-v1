@@ -1,0 +1,55 @@
+
+    <div class="container-fluid">
+        <form>
+            <select name="parameter" id="parameter" class="form-select">
+                {% for param in parameters %}
+                    {% if param==parameter %}
+                    <option value="{{ param }}" selected>{{parameters[param]}}</option>
+                {% else %}
+                    <option value="{{ param }}">{{parameters[param]}}</option>
+                {% endif %}
+                {% endfor %}
+                     
+
+            </select>
+            <input type="text" class="form-control" id="query" name="query" placeholder="Search Query" value="{{query}}">
+            <button type="button" class="btn btn-outline-danger clear-button" onclick="clearSearch()"><i class="fas fa-backspace"></i>Clear</button>
+
+            <button type="submit" class="btn btn-outline-primary search-button"><i class="fas fa-search"></i>Search</button>
+        </form>
+
+    </div>
+<style>
+    form{
+        width:100%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #parameter{
+        margin-left:10px;
+        margin-right:10px;
+        width:10%;
+    }
+    #search{
+        width:50%;
+        margin-right:10px;
+        margin-left:10px;
+    }
+    .search-button{
+        margin-left:10px;
+    
+        width:15%;
+    }
+    .clear-button{
+        margin-left:10px;
+     
+        width:15%;
+    }
+</style>
+<script>
+    function clearSearch(){
+        window.location.href = window.location.href.split('?')[0];
+         
+    }
+</script>

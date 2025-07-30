@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  User Summary - Vehicle Parking App
+{% endblock %}
+
+
+{% block content %}
+  <h1>User Summary</h1>
+  <hr>
+  <p>This page provides a summary of your parking history.</p>
+  <p>Check the chart above for a visual representation of your past and current reservations.</p>
+  <img src="{{ url_for('static', filename='user_parking_history.png') }}">
+
+{% endblock %}
+{% block style %}
+<style>
+  h1 {
+    text-align: center;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+{% endblock %}

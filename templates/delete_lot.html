@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+ Delete Parking Lot - Vehicle Parking App
+{% endblock %}
+
+{% block content %}
+  <h1>Delete Lot</h1>
+  <p class="text-center text danger">
+    Are you sure you want to delete {{lot_id}}
+  </p>
+  <form method="POST" class="form">
+    
+
+    <input type="submit" value="Delete" class="btn btn-success">
+  </form> 
+  
+{% endblock %}
+
+{% block style %}
+<style>
+    h1{
+       
+        text-align:center;
+    }
+    
+</style>
+{% endblock %}
+

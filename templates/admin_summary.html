@@ -1,0 +1,28 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  Admin Summary - Vehicle Parking App
+{% endblock %}
+
+
+{% block content %}
+  <h1>Admin Summary</h1>
+  <hr>
+  <p>This page provides a summary of the parking lot availability.</p>
+  <p>Check the chart above for a visual representation of available and occupied parking spots.</p>
+  <img src="{{ url_for('static', filename='parking_lot_summary.png') }}">
+
+{% endblock %}
+{% block style %}
+<style>
+  h1 {
+    text-align: center;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+{% endblock %}

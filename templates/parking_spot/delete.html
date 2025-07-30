@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+ Delete Parking Spot - Vehicle Parking App
+{% endblock %}
+
+{% block content %}
+  <h1>Delete Spot</h1>
+  <p class="text-center text danger">
+    Are you sure you want to delete {{spot.id}}
+  </p>
+  <form method="POST" action="{{ url_for('delete_spot_post', spot_id=spot.id) }}" class="form">
+    <input type="submit" value="Delete" class="btn btn-success">
+  </form> 
+  
+{% endblock %}
+
+{% block style %}
+<style>
+    h1{
+       
+        text-align:center;
+    }
+    
+</style>
+{% endblock %}
+
